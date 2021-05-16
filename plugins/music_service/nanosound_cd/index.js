@@ -3,6 +3,7 @@
 
 var libQ = require('kew');
 var fs=require('fs-extra');
+var fs1=require('fs');
 var config = new (require('v-conf'))();
 var exec = require('child_process').exec;
 var execSync = require('child_process').execSync;
@@ -150,6 +151,35 @@ nanosoundCd.prototype.saveConfig = function(data) {
 	
 			});
 	}
+	
+	if (self.config.get('autoplay')=="2"){
+		fs1.writeFile('/etc/udev/rules.d/99-local.rules', 'KERNEL=="sr[0-9]", ACTION=="change", ENV{ID_CDROM_MEDIA}=="1", ENV{ID_CDROM_MEDIA_STATE}!="blank", RUN+="/home/volumio/playcd.sh &" KERNEL=="sr[0-9]", ACTION=="change", ENV{DISK_EJECT_REQUEST}=="1", RUN+="/home/volumio/stopcd.sh &"', function(err){
+			if (err) throw err;
+			console.log('File is created successfully.');
+		});
+	}else{
+		fs1.unlinkSync('/etc/udev/rules.d/99-local.rules')
+	}
+
+		exec('/usr/bin/sudo udevadm control -reload-rules', {uid:1000,gid:1000},
+		function (error, stdout, stderr) {
+
+			exec('/usr/bin/sudo udevadm trigger', {uid:1000,gid:1000},
+		                                                                    function (error, stdout, stderr) {
+                		                                                        if(error != null) {
+                                		                                                self.logger.error('Autoplay error: ' + error);
+                                                		                                self.commandRouter.pushToastMessage('error', 'NanoSound CD', 'Problem with starting NanoSound CD:' + error);
+                                                                		        } else {
+                                                                                		self.logger.info('Autoplay success');
+                                                                               			self.commandRouter.pushToastMessage('success', 'NanoSound CD', 'NanoSound CD daemon restarting. Please wait around 10s before playing CD');
+																						sleep(3000);
+		                                                                        }
+																				
+																				defer.resolve();
+										  });
+										  
+	
+	});
 	
 
 
