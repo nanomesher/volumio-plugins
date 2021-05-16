@@ -108,3 +108,5 @@ echo "NanoSound CD installation is completed. Please reboot"
 
 #requred to end the plugin install
 echo "plugininstallend"
+
+echo $'#!/bin/bash\ncurl localhost:3000/api/v1/v1/browse?uri=nanosound_cd | jq ‘.navigation.lists[0].items’ > myjson.txt\ncurl -i –header “Content-Type: application/json” localhost:3000/api/v1/commands/?cmd=clearQueue \ncurl -i –header “Content-Type: application/json” localhost:3000/api/v1/addToQueue –data “$(cat myjson.txt)” \ncurl -i –header “Content-Type: application/json” localhost:3000/api/v1/commands/?cmd=volume&volume=50 \ncurl -i –header “Content-Type: application/json” localhost:3000/api/v1/commands/?cmd=play' > /home/volumio/playcd.sh

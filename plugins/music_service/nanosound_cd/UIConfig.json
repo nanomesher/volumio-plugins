@@ -12,7 +12,7 @@
         "saveButton": {
           "label": "TRANSLATE.SAVE",
           "data": [
-            "upsampling","extractformat","prestart","savepath","loadalbumart","savefolderformat","autoeject"
+            "upsampling","extractformat","prestart","savepath","loadalbumart","savefolderformat","autoeject","autoplay"
           ]
         },
         "content": [
@@ -121,7 +121,26 @@
                   "label": "Yes"
                 }
               ]
-          },          
+          },    
+          {
+            "id": "autoplay",
+            "element":"select",                    
+            "label": "Auto play when insert",
+            "doc": "Auto play when insert",            
+            "value": {"value": "2",
+              "label": "Yes"
+              },
+              "options": [
+                {
+                  "value": "1",
+                  "label": "No"
+                },
+                {
+                  "value": "2",
+                  "label": "Yes"
+                }
+              ]
+          },       
           {
             "id": "configaudio",
             "element": "button",

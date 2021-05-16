@@ -94,6 +94,7 @@ nanosoundCd.prototype.saveConfig = function(data) {
 	self.config.set('savefolderformat', data['savefolderformat']);	
 	self.config.set('loadalbumart', data['loadalbumart'].value);
 	self.config.set('autoeject', data['autoeject'].value);
+	self.config.set('autoplay', data['autoplay'].value);
 
 
 	self.commandRouter.pushToastMessage('success', "NanoSound CD", "NanoSound CD settings saved");
