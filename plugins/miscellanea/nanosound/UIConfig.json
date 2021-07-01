@@ -57,6 +57,10 @@
               "label": "DAC2"
             },
             {
+              "value": "DAC3",
+              "label": "DAC3"
+            },
+            {
               "value": "ProdBoard",
               "label": "ProdBoard"
             },
