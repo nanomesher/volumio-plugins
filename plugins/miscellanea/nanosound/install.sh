@@ -18,9 +18,9 @@ sudo apt-get update
 #START OF python devs
 #sudo apt-get -y install i2c-tools python-smbus python-pip python-dev python-imaging python-rpi.gpio
 sudo apt-get -y install python3-pip
-sudo pip3 install luma.core
-sudo pip3 install luma.oled
-sudo pip3 install schedule
+sudo pip3 install luma.core==2.3.1
+sudo pip3 install luma.oled==3.8.1
+sudo pip3 install schedule==1.1.0
 sudo pip3 install socketIO-client
 #sudo -H pip install --upgrade pip==20.3.4
 #sudo -H pip install --upgrade python-mpd2 socketIO-client
